@@ -1,0 +1,358 @@
+---
+// src/layouts/Layout.astro
+// Aqui recebemos as variáveis para cada página ter um título e descrição próprios
+const { title, description } = Astro.props;
+
+
+import '../styles/global.css';
+---
+
+<!doctype html>
+<html lang="pt-BR">
+<head>
+    <!-- Google Tag Manager -->
+    <script is:inline>
+      (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-PNCKVR3N');
+    </script>
+    <!-- End Google Tag Manager -->
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- ========================================== -->
+    <!-- TÍTULO E DESCRIÇÃO DINÂMICOS DA PÁGINA     -->
+    <!-- ========================================== -->
+    <title>{title}</title>
+    <meta name="description" content={description}>
+
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" sizes="57x57" href="/favicon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/favicon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/favicon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/favicon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/favicon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/favicon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/favicon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/favicon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" href="/favicon/Gemini_Generated_Image_viim6aviim6aviim-removebg-preview.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon/Gemini_Generated_Image_viim6aviim6aviim-removebg-preview.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon/Gemini_Generated_Image_viim6aviim6aviim-removebg-preview.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/favicon/Gemini_Generated_Image_viim6aviim6aviim-removebg-preview.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon/Gemini_Generated_Image_viim6aviim6aviim-removebg-preview.png">
+    <link rel="manifest" href="/favicon/manifest.json">
+    <meta name="msapplication-TileColor" content="#111928">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#111928">
+    
+    <link rel="canonical" href="https://plexuspericias.com.br/">
+    
+    <!-- ========================================== -->
+    <!-- OPEN GRAPH (Tags de Redes Sociais)         -->
+    <!-- ========================================== -->
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content={title}> <!-- Dinâmico aqui também! -->
+    <meta property="og:description" content={description}> <!-- Dinâmico aqui também! -->
+    <meta property="og:url" content="https://plexuspericias.com.br/">
+    <meta property="og:site_name" content="Plexus Perícias">
+    <meta property="og:image" content="https://plexuspericias.com.br/images/social.webp">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <!-- Schema de SEO do Google (O JSON-LD gigante) -->
+    <!-- O "is:inline" avisa ao Astro para não mexer neste script e manter ele intacto -->
+    <script type="application/ld+json" is:inline>
+    {
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "MedicalBusiness",
+                "@id": "https://plexuspericias.com.br#organization",
+                "name": "Plexus Perícia & Assistência Médica",
+                "alternateName": "Plexus Perícias",
+                "url": "https://plexuspericias.com.br",
+                "logo": "https://plexuspericias.com.br/images/logo.webp",
+                "description": "Assistência técnica estratégica e perícias médicas para advogados, empresas e particulares. O elo entre a medicina e a justiça.",
+                "email": "contato@plexuspericias.com.br",
+                "telephone": "+55-61-3034-2602",
+                "address": {
+                    "@type": "PostalAddress",
+                    "addressRegion": "DF",
+                    "addressCountry": "BR"
+                },
+                "areaServed": {
+                    "@type": "Country",
+                    "name": "BR"
+                },
+                "medicalSpecialty": "Perícias Médicas",
+                "priceRange": "$$",
+                "founder": {
+                    "@id": "https://plexuspericias.com.br#dra-perla"
+                },
+                "sameAs": [],
+                "hasOfferCatalog": {
+                    "@type": "OfferCatalog",
+                    "name": "Serviços de Perícia Médica",
+                    "itemListElement": [
+                        {
+                            "@type": "Offer",
+                            "itemOffered": {
+                                "@type": "Service",
+                                "name": "Assistência Técnica Completa",
+                                "description": "Gestão médico-legal estratégica e integrada, cobrindo o ciclo completo do processo, da avaliação preliminar à eventual contestação do laudo."
+                            }
+                        },
+                        {
+                            "@type": "Offer",
+                            "itemOffered": {
+                                "@type": "Service",
+                                "name": "Diagnóstico Prévio de Riscos e Consultoria Médico-Legal",
+                                "description": "Análise técnica de viabilidade voltada à antecipação de cenários e validação científica, assegurando o suporte necessário para uma estratégia jurídica sólida."
+                            }
+                        },
+                        {
+                            "@type": "Offer",
+                            "itemOffered": {
+                                "@type": "Service",
+                                "name": "Parecer Técnico de Viabilidade Processual",
+                                "description": "Instrumento técnico-estratégico que fundamenta o caso sob o olhar médico-científico, direcionando a produção da prova."
+                            }
+                        },
+                        {
+                            "@type": "Offer",
+                            "itemOffered": {
+                                "@type": "Service",
+                                "name": "Parecer Técnico Pericial Judicial ou Extrajudicial",
+                                "description": "Elaboração de parecer técnico-científico robusto para fundamentar demandas judiciais, administrativas ou extrajudiciais."
+                            }
+                        },
+                        {
+                            "@type": "Offer",
+                            "itemOffered": {
+                                "@type": "Service",
+                                "name": "Impugnação e Revisão de Laudo Pericial",
+                                "description": "Exame crítico e especializado de laudos periciais judiciais, focado na detecção de falhas técnicas, metodológicas ou científicas."
+                            }
+                        },
+                        {
+                            "@type": "Offer",
+                            "itemOffered": {
+                                "@type": "Service",
+                                "name": "Acompanhamento Presencial de Perícia Judicial",
+                                "description": "Presença técnica especializada durante o ato pericial, focada na fiscalização do exame e na preservação dos interesses da parte."
+                            }
+                        },
+                        {
+                            "@type": "Offer",
+                            "itemOffered": {
+                                "@type": "Service",
+                                "name": "Elaboração de Quesitos Técnicos",
+                                "description": "Desenvolvimento estratégico de questionamentos técnicos para guiar a produção da prova e elucidar os elementos fundamentais da tese jurídica."
+                            }
+                        }
+                    ]
+                }
+            },
+            {
+                "@type": "WebSite",
+                "@id": "https://plexuspericias.com.br#website",
+                "url": "https://plexuspericias.com.br",
+                "name": "Plexus Perícias - Perícia Médica e Assistência Técnica Estratégica",
+                "inLanguage": "pt-BR",
+                "publisher": {
+                    "@id": "https://plexuspericias.com.br#organization"
+                }
+            },
+            {
+                "@type": "WebPage",
+                "@id": "https://plexuspericias.com.br",
+                "url": "https://plexuspericias.com.br",
+                "name": "Plexus Perícias - A Ciência que Converte sua Tese em Vitória Jurídica",
+                "isPartOf": {
+                    "@id": "https://plexuspericias.com.br#website"
+                },
+                "about": {
+                    "@id": "https://plexuspericias.com.br#organization"
+                },
+                "primaryImageOfPage": {
+                    "@id": "https://plexuspericias.com.br#primaryimage"
+                },
+                "image": {
+                    "@id": "https://plexuspericias.com.br#primaryimage"
+                },
+                "thumbnailUrl": "https://plexuspericias.com.br/images/social.webp",
+                "datePublished": "2026-03-12T00:00:00+00:00",
+                "dateModified": "2026-03-12T00:00:00+00:00",
+                "description": "Assistência técnica estratégica em causas Cíveis, Previdenciárias, Criminais e Trabalhistas. O elo entre a medicina e a justiça.",
+                "breadcrumb": {
+                    "@id": "https://plexuspericias.com.br#breadcrumb"
+                },
+                "inLanguage": "pt-BR",
+                "potentialAction": [
+                    {
+                        "@type": "ReadAction",
+                        "target": [
+                            "https://plexuspericias.com.br"
+                        ]
+                    }
+                ]
+            },
+            {
+                "@type": "BreadcrumbList",
+                "@id": "https://plexuspericias.com.br#breadcrumb",
+                "itemListElement": [
+                    {
+                        "@type": "ListItem",
+                        "position": 1,
+                        "name": "Início",
+                        "item": "https://plexuspericias.com.br"
+                    }
+                ]
+            },
+            {
+                "@type": "ImageObject",
+                "inLanguage": "pt-BR",
+                "@id": "https://plexuspericias.com.br#primaryimage",
+                "url": "https://plexuspericias.com.br/images/social.webp",
+                "contentUrl": "https://plexuspericias.com.br/images/social.webp",
+                "width": 1200,
+                "height": 630
+            },
+            {
+                "@type": "Person",
+                "@id": "https://plexuspericias.com.br#dra-perla",
+                "name": "Perla Soares da Silva Rodovalho",
+                "jobTitle": "CEO & Fundadora",
+                "image": "https://plexuspericias.com.br/images/dra.webp",
+                "worksFor": {
+                    "@id": "https://plexuspericias.com.br#organization"
+                },
+                "description": "CEO e Fundadora da Plexus Perícia & Assistência Médica (CRM 35210/DF). Formação em Perícias Médicas pelo Instituto Felipe Hurtado (IFH) — CEPEM e TEMPEM.",
+                "hasCredential": [
+                    {
+                        "@type": "EducationalOccupationalCredential",
+                        "credentialCategory": "Graduação em Medicina"
+                    },
+                    {
+                        "@type": "EducationalOccupationalCredential",
+                        "credentialCategory": "CPEM - Curso de Formação em Perícias Médicas",
+                        "recognizedBy": {
+                            "@type": "Organization",
+                            "name": "Instituto Felipe Hurtado (IFH)"
+                        }
+                    },
+                    {
+                        "@type": "EducationalOccupationalCredential",
+                        "credentialCategory": "TEMPEM - Treinamento em Perícias Médicas",
+                        "recognizedBy": {
+                            "@type": "Organization",
+                            "name": "Instituto Felipe Hurtado (IFH)"
+                        }
+                    }
+                ]
+            },
+            {
+                "@type": "FAQPage",
+                "@id": "https://plexuspericias.com.br#faq",
+                "mainEntity": [
+                    {
+                        "@type": "Question",
+                        "name": "Qual a diferença entre o Perito Judicial e o Assistente Técnico?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "O Perito Judicial é nomeado pelo juiz (CPC art. 465). O Assistente Técnico é indicado pela parte para garantir o contraditório técnico (CPC art. 466; Lei 12.842/2013). A Plexus atua em conformidade com a Resolução CFM nº 2.336/2023, que veda promessa de resultado em publicidade médica."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Os atendimentos são apenas para advogados?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Não. Atendemos empresas que necessitam de auditoria médica e pessoas físicas em busca de relatórios médicos especializados, tal como suporte e assessoria para empresas."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "As manifestações técnicas são sigilosas?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Sim. Todas as sindicâncias e processos tramitam sob sigilo processual e ético profissional."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Qual a região de atuação?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Temos estrutura para prestar consultoria e elaboração de pareceres para todo o Brasil. Para acompanhamentos presenciais, consulte nossa logística regional e nacional."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Como são cobrados os honorários?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Para relatórios médicos especializados e pareceres técnicos em âmbito privado, os honorários são definidos conforme a complexidade do estudo e pesquisa necessários."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Qual o momento ideal para contratar perícia?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "O quanto antes. Na fase inicial, podemos avaliar a viabilidade do caso (evitando gastos inúteis). No processo, a elaboração dos quesitos iniciais é o momento mais crítico para o sucesso da prova."
+                        }
+                    }
+                ]
+            }
+        ]
+    }
+    </script>
+	<!-- Google tag (gtag.js) - carregado após page load para não bloquear render -->
+    <script is:inline>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        function gtag_report_conversion() {
+          gtag('event', 'conversion', {
+              'send_to': 'AW-18027249419/KBR1COr2r44cEIv-h5RD',
+              'value': 1.0,
+              'currency': 'BRL'
+          });
+          return false;
+        }
+        window.addEventListener('load', function() {
+            var s = document.createElement('script');
+            s.src = 'https://www.googletagmanager.com/gtag/js?id=AW-18027249419';
+            s.async = true;
+            s.onload = function() {
+                gtag('js', new Date());
+                gtag('config', 'AW-18027249419');
+            };
+            document.head.appendChild(s);
+        });
+    </script>
+    <!-- Preload recursos críticos -->
+    <link rel="preload" href="/fonts/Inter/InterVariable.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/images/logo.webp" as="image" fetchpriority="high">
+    <link rel="preload" href="/images/hero-perla.webp" as="image" fetchpriority="high">
+
+
+
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PNCKVR3N"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <!-- Tudo que estiver em outras páginas vai aparecer mágicamente AQUI no lugar da tag slot -->
+    <slot />
+
+</body>
+</html>

@@ -1,0 +1,191 @@
+<section class="audience section-padding">
+    <div class="container">
+        <div class="audience-header reveal" style="text-align:center">
+            <span class="section-tag">&#128100;&nbsp; Atendimento Especializado</span>
+            <h4 class="audience-title">Selecione seu perfil</h4>
+            <p class="audience-subtitle">Seja você advogado, <strong>empresa</strong>, paciente ou médico, temos a solução técnica certa para o seu caso.</p>
+        </div>
+
+        <!-- Seletor de perfil -->
+        <div class="reveal" data-delay="80">
+            <span class="audience-sou-um"></span>
+        </div>
+        <div class="audience-tabs-wrapper reveal" data-delay="100">
+            <div class="audience-tabs">
+                <button class="audience-tab active" data-tab="advogado">
+                    <svg class="icon"><use href="/icons.svg#scale-balanced"/></svg>
+                    Sou Advogado
+                </button>
+                <button class="audience-tab" data-tab="paciente">
+                    <svg class="icon"><use href="/icons.svg#user-doctor"/></svg>
+                    Sou Paciente
+                </button>
+                <button class="audience-tab" data-tab="clinica">
+                    <svg class="icon"><use href="/icons.svg#heart-pulse"/></svg>
+                    Sou Médico / Clínica
+                </button>
+            </div>
+        </div>
+
+        <!-- Painéis de conteúdo -->
+        <div class="audience-panels reveal" data-delay="200">
+
+            <!-- PERFIL 1 — ADVOGADO -->
+            <div class="audience-panel active" id="panel-advogado">
+                <div class="audience-panel-inner">
+                    <div class="audience-panel-right">
+                        <p class="audience-areas-label">
+                            <svg class="icon"><use href="/icons.svg#scale-balanced"/></svg>
+                            Áreas de Atuação
+                        </p>
+                        <ul class="audience-areas-list">
+                            <li><span class="area-icon">🏢</span>Defesa de Empresas</li>
+                            <li><span class="area-icon">⚖️</span>Causas trabalhistas</li>
+                            <li><span class="area-icon">🤝</span>Direito previdenciário</li>
+                            <li><span class="area-icon">🩺</span>Erro assistencial / médico</li>
+                            <li><span class="area-icon">🛡️</span>Planos de saúde</li>
+                            <li><span class="area-icon">🔒</span>Causas securitárias</li>
+                            <li><span class="area-icon">⚕️</span>Direito médico</li>
+                            <li><span class="area-icon">📋</span>Análise de prontuários</li>
+                        </ul>
+                        <blockquote class="audience-quote">
+                            "Não entregamos apenas laudos. Entregamos <strong>estratégia técnica</strong> aplicada à decisão judicial."
+                        </blockquote>
+                    </div>
+                    <div class="audience-panel-left">
+                        <h3 class="audience-panel-h3">Fortaleça sua tese com suporte técnico médico</h3>
+                        <p class="audience-panel-desc">Atuamos em conjunto com advogados nas áreas de direito civil | direito médico (Erro Médico), trabalhista, previdenciário, criminal. Erro assistencial, planos de saúde e securitário.</p>
+                        <ul class="audience-checklist">
+                            <li><svg class="icon audience-check-icon"><use href="/icons.svg#check"/></svg>Formulação de quesitos técnicos estratégicos</li>
+                            <li><svg class="icon audience-check-icon"><use href="/icons.svg#check"/></svg>Impugnação fundamentada de laudos periciais</li>
+                            <li><svg class="icon audience-check-icon"><use href="/icons.svg#check"/></svg>Tradução da linguagem médica para o Judiciário</li>
+                            <li><svg class="icon audience-check-icon"><use href="/icons.svg#check"/></svg>Redução de lacunas e subjetividades periciais</li>
+                            <li><svg class="icon audience-check-icon"><use href="/icons.svg#check"/></svg>Análise de viabilidade técnica do caso</li>
+                            <li><svg class="icon audience-check-icon"><use href="/icons.svg#check"/></svg>Suporte técnico contínuo ao longo do processo</li>
+                            <li><svg class="icon audience-check-icon"><use href="/icons.svg#check"/></svg>Assistência técnica médica pericial completa</li>
+                        </ul>
+                                                <div class="qual-form" id="qform-adv">
+                          <p class="qual-form-label">Qual é o momento do seu caso?</p>
+                          <div class="qual-form-options" id="qopts-adv">
+                            <button type="button" class="qual-opt" data-tab="adv" data-val="Ainda não tenho processo aberto">Ainda não tenho processo aberto</button>
+                            <button type="button" class="qual-opt" data-tab="adv" data-val="Processo em andamento">Processo em andamento</button>
+                            <button type="button" class="qual-opt" data-tab="adv" data-val="Tenho laudo/perícia para contestar">Tenho laudo / perícia para contestar</button>
+                          </div>
+                          <div id="qphone-group-adv" style="display:none;margin-bottom:12px">
+                            <p class="qual-form-label" style="margin-bottom:6px">Telefone <span style="font-weight:400;opacity:.6">(opcional)</span></p>
+                            <input type="tel" class="qual-phone" id="qphone-adv" placeholder="(61) 99999-9999">
+                          </div>
+                          <a href="#" id="qcta-adv" data-perfil="Advogado(a)/Escritório" class="btn-whatsapp qual-cta" target="_blank" rel="noopener noreferrer" style="pointer-events:none;opacity:.45;width:100%;justify-content:center" onclick="gtag_report_conversion()">
+                            <svg class="icon"><use href="/icons.svg#whatsapp"/></svg>
+                            Solicitar análise do caso
+                          </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PERFIL 2 — PACIENTE -->
+            <div class="audience-panel" id="panel-paciente">
+                <div class="audience-panel-inner">
+                    <div class="audience-panel-right">
+                        <p class="audience-areas-label">
+                            <svg class="icon"><use href="/icons.svg#certificate"/></svg>
+                            O Que Você Recebe
+                        </p>
+                        <ul class="audience-areas-list">
+                            <li><span class="area-icon">🤝</span>Acompanhamento na perícia</li>
+                            <li><span class="area-icon">📄</span>Laudo Médico para PCD | Seguradoras | Fins judiciais</li>
+                            <li><span class="area-icon">🔍</span>Análise técnica da documentação</li>
+                            <li><span class="area-icon">💬</span>Tradução clara da situação clínica</li>
+                            <li><span class="area-icon">🇧🇷</span>Atendimento em todo Brasil</li>
+                            <li><span class="area-icon">🔒</span>Absoluto sigilo profissional</li>
+                        </ul>
+                        <blockquote class="audience-quote">
+                            "Cada caso é único. Tratamos o seu com a atenção técnica e humana que ele merece."
+                        </blockquote>
+                    </div>
+                    <div class="audience-panel-left">
+                        <h3 class="audience-panel-h3">Seus direitos merecem uma defesa técnica à altura</h3>
+                        <p class="audience-panel-desc">Atendemos pessoas físicas que precisam de um parecer médico fundamentado ou assistência técnica em perícias judiciais e administrativas.</p>
+                        <ul class="audience-checklist">
+                            <li><svg class="icon audience-check-icon"><use href="/icons.svg#check"/></svg>Perícia judicial desfavorável</li>
+                            <li><svg class="icon audience-check-icon"><use href="/icons.svg#check"/></svg>Perícia judicial desfavorável</li>
+                            <li><svg class="icon audience-check-icon"><use href="/icons.svg#check"/></svg>Negativa de plano de saúde</li>
+                            <li><svg class="icon audience-check-icon"><use href="/icons.svg#check"/></svg>Discussão de incapacidade laboral</li>
+                            <li><svg class="icon audience-check-icon"><use href="/icons.svg#check"/></svg>Organização de documentação médica</li>
+                            <li><svg class="icon audience-check-icon"><use href="/icons.svg#check"/></svg>Pareceres e laudos para fins de benefícios</li>
+                        </ul>
+                                                <div class="qual-form" id="qform-pac">
+                          <p class="qual-form-label">Qual é o momento do seu caso?</p>
+                          <div class="qual-form-options" id="qopts-pac">
+                            <button type="button" class="qual-opt" data-tab="pac" data-val="Ainda não tenho processo aberto">Ainda não tenho processo aberto</button>
+                            <button type="button" class="qual-opt" data-tab="pac" data-val="Processo em andamento">Processo em andamento</button>
+                            <button type="button" class="qual-opt" data-tab="pac" data-val="Tenho laudo/perícia para contestar">Tenho laudo / perícia para contestar</button>
+                          </div>
+                          <div id="qphone-group-pac" style="display:none;margin-bottom:12px">
+                            <p class="qual-form-label" style="margin-bottom:6px">Telefone <span style="font-weight:400;opacity:.6">(opcional)</span></p>
+                            <input type="tel" class="qual-phone" id="qphone-pac" placeholder="(61) 99999-9999">
+                          </div>
+                          <a href="#" id="qcta-pac" data-perfil="Parte com advogado / Sem advogado" class="btn-whatsapp qual-cta" target="_blank" rel="noopener noreferrer" style="pointer-events:none;opacity:.45;width:100%;justify-content:center" onclick="gtag_report_conversion()">
+                            <svg class="icon"><use href="/icons.svg#whatsapp"/></svg>
+                            Solicitar análise do caso
+                          </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PERFIL 3 — MÉDICO / CLÍNICA -->
+            <div class="audience-panel" id="panel-clinica">
+                <div class="audience-panel-inner">
+                    <div class="audience-panel-right">
+                        <p class="audience-areas-label">
+                            <svg class="icon"><use href="/icons.svg#user-doctor"/></svg>
+                            Quem Atendemos
+                        </p>
+                        <ul class="audience-areas-list">
+                            <li><span class="area-icon">🏥</span>Médicos e especialidades</li>
+                            <li><span class="area-icon">🏢</span>Hospitais e Clínicas</li>
+                            <li><span class="area-icon">🛡️</span>Operadoras de Saúde</li>
+                            <li><span class="area-icon">📋</span>Auditoria Médica</li>
+                            <li><span class="area-icon">⚖️</span>Processos administrativos</li>
+                        </ul>
+                        <blockquote class="audience-quote">
+                            "Conhecimento clínico e jurídico integrados para proteger sua atuação profissional."
+                        </blockquote>
+                    </div>
+                    <div class="audience-panel-left">
+                        <h3 class="audience-panel-h3">Suporte técnico para profissionais e instituições de saúde</h3>
+                        <p class="audience-panel-desc">Apoiamos médicos, clínicas, hospitais e operadoras de saúde em processos judiciais, administrativos e de auditoria médica.</p>
+                        <ul class="audience-checklist">
+                            <li><svg class="icon audience-check-icon"><use href="/icons.svg#check"/></svg>Assistência em processos de erro assistencial</li>
+                            <li><svg class="icon audience-check-icon"><use href="/icons.svg#check"/></svg>Auditoria médica e revisão de prontuários</li>
+                            <li><svg class="icon audience-check-icon"><use href="/icons.svg#check"/></svg>Pareceres técnicos de defesa</li>
+                            <li><svg class="icon audience-check-icon"><use href="/icons.svg#check"/></svg>Tradução médico-jurídica de documentação clínica</li>
+                            <li><svg class="icon audience-check-icon"><use href="/icons.svg#check"/></svg>Suporte em processos junto a planos de saúde</li>
+                            <li><svg class="icon audience-check-icon"><use href="/icons.svg#check"/></svg>Assessoria técnica em processos administrativos (CRM, ANS)</li>
+                        </ul>
+                                                <div class="qual-form" id="qform-med">
+                          <p class="qual-form-label">Qual é o momento do seu caso?</p>
+                          <div class="qual-form-options" id="qopts-med">
+                            <button type="button" class="qual-opt" data-tab="med" data-val="Ainda não tenho processo aberto">Ainda não tenho processo aberto</button>
+                            <button type="button" class="qual-opt" data-tab="med" data-val="Processo em andamento">Processo em andamento</button>
+                            <button type="button" class="qual-opt" data-tab="med" data-val="Tenho laudo/perícia para contestar">Tenho laudo / perícia para contestar</button>
+                          </div>
+                          <div id="qphone-group-med" style="display:none;margin-bottom:12px">
+                            <p class="qual-form-label" style="margin-bottom:6px">Telefone <span style="font-weight:400;opacity:.6">(opcional)</span></p>
+                            <input type="tel" class="qual-phone" id="qphone-med" placeholder="(61) 99999-9999">
+                          </div>
+                          <a href="#" id="qcta-med" data-perfil="Médico(a)/Clínica/Hospital" class="btn-whatsapp qual-cta" target="_blank" rel="noopener noreferrer" style="pointer-events:none;opacity:.45;width:100%;justify-content:center" onclick="gtag_report_conversion()">
+                            <svg class="icon"><use href="/icons.svg#whatsapp"/></svg>
+                            Solicitar análise do caso
+                          </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            </div><!-- /audience-panels -->
+    </div>
+</section>
+  <hr class="section-divider">

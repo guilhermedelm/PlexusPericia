@@ -1,0 +1,42 @@
+---
+// Importando o Layout Base
+import Layout from '../layouts/Layout.astro';
+
+// Importando os Componentes Globais
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import WhatsAppFloat from '../components/WhatsAppFloat.astro';
+
+// Importando as Seções da Landing Page
+import Hero from '../components/Hero.astro';
+import Problem from '../components/Problem.astro';
+import Services from '../components/Services.astro';
+import Audience from '../components/Audience.astro';
+import Process from '../components/Processo.astro';
+import Founder from '../components/Founder.astro';
+import About from '../components/Autorithy.astro';
+import FAQ from '../components/FAQ.astro';
+import CtaFinal from '../components/CtaFinal.astro';
+---
+
+<Layout 
+  title="Plexus Perícias - Perícia Médica e Assistência Técnica: A Ciência que Converte sua Tese em Vitória." 
+  description="Assistência técnica estratégica em causas Cíveis, Previdenciárias, Criminais e Trabalhistas. Extraímos dos fatos clínicos a fundamentação estratégica para o sucesso da demanda."
+>
+  <Header />
+  
+  <main>
+    <Hero />
+    <Problem />
+    <Services />
+    <Audience />
+    <Process />
+    <Founder />
+    <About />
+    <FAQ />
+    <CtaFinal />
+  </main>
+
+  <Footer />
+  <WhatsAppFloat />
+</Layout>
