@@ -188,4 +188,112 @@
             </div><!-- /audience-panels -->
     </div>
 </section>
+
+<script>
+function initAudienceTabs(){
+    var tabs   = document.querySelectorAll('.audience-tab');
+    var panels = document.querySelectorAll('.audience-panel');
+    if(!tabs.length) return;
+
+    function switchPanel(targetId){
+      var next = document.getElementById('panel-'+targetId);
+      if(!next) return;
+      var current = document.querySelector('.audience-panel.active');
+      if(current === next) return;
+
+      /* Fade out atual */
+      if(current){
+        current.style.transition='opacity .22s ease';
+        current.style.opacity='0';
+        setTimeout(function(){
+          current.classList.remove('active');
+          current.style.opacity='';
+          current.style.transition='';
+          /* Fade in novo */
+          next.style.opacity='0';
+          next.style.transition='opacity .3s ease';
+          next.classList.add('active');
+          requestAnimationFrame(function(){
+            requestAnimationFrame(function(){next.style.opacity='1';});
+          });
+          setTimeout(function(){next.style.transition='';},350);
+        },230);
+      } else {
+        next.classList.add('active');
+      }
+    }
+
+    tabs.forEach(function(tab){
+      tab.addEventListener('click',function(){
+        tabs.forEach(function(t){t.classList.remove('active');});
+        tab.classList.add('active');
+        switchPanel(tab.getAttribute('data-tab'));
+      });
+    });
+}
+initAudienceTabs();
+</script>
+<script>
+  (function(){
+    function buildWAUrl(perfil, momento, telefone){
+      var txt = 'Olá! Vim do site da Plexus Perícias.\n';
+      txt += '👤 Perfil: ' + perfil + '\n';
+      txt += '📋 Situação: ' + momento + '\n';
+      if(telefone){ txt += '📞 Telefone: ' + telefone + '\n'; }
+      txt += '\nGostaria de saber mais sobre os serviços.';
+      return 'https://wa.me/556130342602?text=' + encodeURIComponent(txt);
+    }
+
+    function initQualForm(tabId, perfil){
+      var opts = document.querySelectorAll('#qopts-' + tabId + ' .qual-opt');
+      var cta  = document.getElementById('qcta-' + tabId);
+      var phoneGroup = document.getElementById('qphone-group-' + tabId);
+      var phoneInput = document.getElementById('qphone-' + tabId);
+      var selected = null;
+
+      opts.forEach(function(opt){
+        opt.addEventListener('click', function(){
+          opts.forEach(function(o){ o.classList.remove('selected'); });
+          opt.classList.add('selected');
+          selected = opt.dataset.val;
+          phoneGroup.style.display = 'block';
+          cta.style.pointerEvents = 'auto';
+          cta.style.opacity = '1';
+          cta.href = buildWAUrl(perfil, selected, phoneInput ? phoneInput.value : '');
+        });
+      });
+
+      if(phoneInput){
+        phoneInput.addEventListener('input', function(){
+          if(selected){
+            cta.href = buildWAUrl(perfil, selected, phoneInput.value);
+          }
+        });
+      }
+
+      if(cta){
+        cta.addEventListener('click', function(e){
+          if(!selected){ e.preventDefault(); }
+          // Fire GTM event
+          if(window.dataLayer){
+            window.dataLayer.push({
+              event: 'lead_qualificado',
+              perfil: perfil,
+              momento: selected,
+              tem_telefone: !!(phoneInput && phoneInput.value)
+            });
+          }
+        });
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function(){
+      initQualForm('adv', 'Advogado(a)/Escritório');
+      initQualForm('pac', 'Parte com advogado / Sem advogado');
+      initQualForm('med', 'Médico(a)/Clínica/Hospital');
+    });
+  })();
+  </script>
+
+
   <hr class="section-divider">

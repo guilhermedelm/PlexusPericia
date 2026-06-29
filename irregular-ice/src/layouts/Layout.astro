@@ -355,4 +355,75 @@ import '../styles/global.css';
     <slot />
 
 </body>
+<script>
+function applyTilt(selector){
+    document.querySelectorAll(selector).forEach(function(card){
+      card.addEventListener('mousemove',function(e){
+        var r=card.getBoundingClientRect();
+        var x=(e.clientX-r.left)/r.width  -0.5;
+        var y=(e.clientY-r.top) /r.height -0.5;
+        var rx= y*-14; var ry= x*14;
+        card.style.transition='transform .08s ease,box-shadow .1s';
+        card.style.transform='perspective(800px) rotateX('+rx+'deg) rotateY('+ry+'deg) translateZ(10px)';
+        card.style.boxShadow=(ry<0?'':'-')+Math.abs(ry)+'px '+(-rx)+'px 28px rgba(247,215,182,.14)';
+      });
+      card.addEventListener('mouseleave',function(){
+        card.style.transition='transform .45s ease,box-shadow .45s,border-color .3s';
+        card.style.transform='';
+        card.style.boxShadow='';
+      });
+    });
+  }
+  applyTilt('.service-card');
+  applyTilt('.differential-card');
+  applyTilt('.problem-card');
+  applyTilt('.authority-client-card');
+</script>
+
+  /* =============================================
+     SCROLL 3D: COUNTER + SECTION DEPTH
+  ============================================= */
+
+<script>
+  window.addEventListener('scroll',function(){
+    var sy=window.scrollY;
+    var secs=document.querySelectorAll('section');
+    secs.forEach(function(sec){
+      var r=sec.getBoundingClientRect();
+      var prog=Math.min(1,Math.max(0,-r.top/(r.height*0.6)));
+      var rx=prog*2; /* leve inclinação conforme entra na viewport */
+      /* apenas estética suave — não aplicar em mobile */
+      if(window.innerWidth>1024){
+        sec.style.perspectiveOrigin='50% '+(50+prog*5)+'%';
+      }
+    });
+  },{passive:true});
+</script>
+
+<!-- ── Tintim WhatsApp Tracking ── -->
+
+
+<script>
+    (function(){
+      function initTintim(){
+        document.querySelectorAll('a[href*="wa.me"]').forEach(function(el){
+          el.addEventListener('click', function(){
+            var label = el.dataset.tintimLabel || document.title;
+            if(window.dataLayer){
+              window.dataLayer.push({event:'whatsapp_click', label: label});
+            }
+            // Tintim pixel (substitua YOUR_TINTIM_ID pelo ID real)
+            if(window.ttq){
+              window.ttq.track('Contact', {description: label});
+            }
+          });
+        });
+      }
+      if(document.readyState === 'loading'){
+        document.addEventListener('DOMContentLoaded', initTintim);
+      } else { initTintim(); }
+    })();
+</script>
+
+
 </html>

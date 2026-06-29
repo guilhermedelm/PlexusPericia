@@ -58,4 +58,44 @@
         </div>
     </div>
 </section>
+
+<script>
+  var hero      = document.querySelector('.hero');
+  var heroBg    = document.querySelector('.hero-bg');
+  var heroPanel = document.querySelector('.hero-right-panel');
+  var heroTitle = document.querySelector('.hero-title');
+
+  if(hero && heroBg){
+    var rafId=null;
+    hero.addEventListener('mousemove',function(e){
+      if(rafId) cancelAnimationFrame(rafId);
+      rafId=requestAnimationFrame(function(){
+        var r=hero.getBoundingClientRect();
+        var x=(e.clientX-r.left)/r.width -0.5;
+        var y=(e.clientY-r.top) /r.height-0.5;
+        heroBg.style.transform='scale(1.06) translate('+(x*22)+'px,'+(y*14)+'px)';
+        heroBg.style.transition='transform .12s ease';
+        if(heroPanel){
+          heroPanel.style.transform='perspective(1000px) rotateY('+(x*8)+'deg) rotateX('+(-y*5)+'deg) translateY('+(y*8)+'px)';
+          heroPanel.style.transition='transform .12s ease';
+        }
+        if(heroTitle){
+          heroTitle.style.transform='translate('+(x*-8)+'px,'+(y*-5)+'px)';
+          heroTitle.style.transition='transform .15s ease';
+        }
+      });
+    });
+    hero.addEventListener('mouseleave',function(){
+      if(rafId) cancelAnimationFrame(rafId);
+      heroBg.style.transition='transform .6s ease';
+      heroBg.style.transform='';
+      if(heroPanel){
+        heroPanel.style.transition='transform .6s ease';
+        heroPanel.style.transform='';
+        setTimeout(function(){heroPanel.style.transition='';},650);
+      }
+      if(heroTitle){heroTitle.style.transition='transform .5s ease';heroTitle.style.transform='';}
+    });
+  }
+</script>
   <hr class="section-divider">

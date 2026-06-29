@@ -114,4 +114,68 @@
         </div>
     </div>
 </section>
+
+<script>
+
+  var track  = document.getElementById('servicesTrack');
+  var dotsEl = document.getElementById('servicesDots');
+  var btnPrev= document.getElementById('servicesPrev');
+  var btnNext= document.getElementById('servicesNext');
+  if(!track) return;
+
+  var cards   = Array.from(track.querySelectorAll('.service-card'));
+  var total   = cards.length;
+  var current = 0;
+  var perView, maxIdx, isDragging=false, startX=0, startTranslate=0;
+
+  function cpv(){
+    return window.innerWidth>=1024?3:window.innerWidth>=600?2:1;
+  }
+  function cardW(){
+    return cards[0].getBoundingClientRect().width;
+  }
+  function gap(){
+    var g=parseFloat(getComputedStyle(track).columnGap||getComputedStyle(track).gap||'24');
+    return isNaN(g)?24:g;
+  }
+  function offset(idx){
+    return idx*(cardW()+gap());
+  }
+  function goTo(idx){
+    perView=cpv(); maxIdx=Math.max(0,total-perView);
+    current=Math.max(0,Math.min(idx,maxIdx));
+    track.style.transform='translateX(-'+offset(current)+'px)';
+    updateDots(); updateBtns();
+  }
+  function updateBtns(){
+    if(btnPrev) btnPrev.disabled=(current===0);
+    if(btnNext) btnNext.disabled=(current>=maxIdx);
+  }
+  function updateDots(){
+    var dots=dotsEl?dotsEl.querySelectorAll('.carousel-dot'):[];
+    Array.from(dots).forEach(function(d,i){d.classList.toggle('active',i===current);});
+  }
+  /* Criar dots */
+  if(dotsEl){
+    perView=cpv(); maxIdx=Math.max(0,total-perView);
+    for(var i=0;i<=maxIdx;i++){
+      (function(idx){
+        var d=document.createElement('button');
+        d.className='carousel-dot'+(idx===0?' active':'');
+        d.setAttribute('aria-label','Ir para slide '+(idx+1));
+        d.addEventListener('click',function(){goTo(idx);});
+        dotsEl.appendChild(d);
+      })(i);
+    }
+  }
+  if(btnPrev) btnPrev.addEventListener('click',function(){goTo(current-1);});
+  if(btnNext) btnNext.addEventListener('click',function(){goTo(current+1);});
+  window.addEventListener('resize',function(){
+    var newPerView=cpv();
+    if(newPerView!==perView){perView=newPerView;maxIdx=Math.max(0,total-perView);goTo(Math.min(current,maxIdx));}
+    else{track.style.transform='translateX(-'+offset(current)+'px)';}
+  });
+  goTo(0);
+
+</script>
   <hr class="section-divider">
