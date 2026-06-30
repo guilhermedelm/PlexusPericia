@@ -115,7 +115,7 @@
     </div>
 </section>
 
-<script>
+<!-- <script>
 
   var track  = document.getElementById('servicesTrack');
   var dotsEl = document.getElementById('servicesDots');
@@ -177,5 +177,119 @@
   });
   goTo(0);
 
+</script> -->
+
+
+
+<script>
+  function initServicesCarousel() {
+    // 1. Buscamos os elementos garantindo o tipo correto
+    const track = document.getElementById('servicesTrack') as HTMLElement | null;
+    const dotsEl = document.getElementById('servicesDots') as HTMLElement | null;
+    
+    // Fazemos o cast (afirmação de tipo) para HTMLButtonElement, 
+    // assim o TS sabe que podemos usar a propriedade '.disabled'
+    const btnPrev = document.getElementById('servicesPrev') as HTMLButtonElement | null;
+    const btnNext = document.getElementById('servicesNext') as HTMLButtonElement | null;
+    
+    // Se o track não existir, encerramos a execução em segurança
+    if (!track) return;
+
+    const cards = Array.from(track.querySelectorAll('.service-card'));
+    const total = cards.length;
+    let current = 0;
+    
+    // 2. Declaramos os tipos explicitamente para evitar o erro 'any' implícito
+    let perView: number;
+    let maxIdx: number;
+    let isDragging = false;
+    let startX = 0;
+    let startTranslate = 0;
+
+    function cpv(): number {
+      return window.innerWidth >= 1024 ? 3 : window.innerWidth >= 600 ? 2 : 1;
+    }
+
+    function cardW(): number {
+      return cards[0].getBoundingClientRect().width;
+    }
+
+    function gap(): number {
+      // Garantimos ao TS que track é um HTMLElement aqui
+      const g = parseFloat(window.getComputedStyle(track as HTMLElement).columnGap || window.getComputedStyle(track as HTMLElement).gap || '24');
+      return isNaN(g) ? 24 : g;
+    }
+
+    // 3. Tipamos os parâmetros das funções (idx: number)
+    function offset(idx: number): number {
+      return idx * (cardW() + gap());
+    }
+
+    function goTo(idx: number) {
+      perView = cpv(); 
+      maxIdx = Math.max(0, total - perView);
+      current = Math.max(0, Math.min(idx, maxIdx));
+      
+      (track as HTMLElement).style.transform = 'translateX(-' + offset(current) + 'px)';
+      
+      updateDots(); 
+      updateBtns();
+    }
+
+    function updateBtns() {
+      if (btnPrev) btnPrev.disabled = (current === 0);
+      if (btnNext) btnNext.disabled = (current >= maxIdx);
+    }
+
+    function updateDots() {
+      const dots = dotsEl ? dotsEl.querySelectorAll('.carousel-dot') : [];
+      Array.from(dots).forEach(function(d, i) {
+        d.classList.toggle('active', i === current);
+      });
+    }
+
+    /* Criar dots */
+    if (dotsEl) {
+      perView = cpv(); 
+      maxIdx = Math.max(0, total - perView);
+      
+      // 4. Bônus: Trocando 'var' por 'let' no loop, eliminamos a necessidade
+      // daquela função anônima complexa que você tinha para proteger o escopo do índice!
+      for (let i = 0; i <= maxIdx; i++) {
+        const d = document.createElement('button');
+        d.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+        d.setAttribute('aria-label', 'Ir para slide ' + (i + 1));
+        
+        d.addEventListener('click', function() { 
+          goTo(i); 
+        });
+        
+        dotsEl.appendChild(d);
+      }
+    }
+
+    if (btnPrev) btnPrev.addEventListener('click', function() { goTo(current - 1); });
+    if (btnNext) btnNext.addEventListener('click', function() { goTo(current + 1); });
+    
+    window.addEventListener('resize', function() {
+      const newPerView = cpv();
+      if (newPerView !== perView) {
+        perView = newPerView;
+        maxIdx = Math.max(0, total - perView);
+        goTo(Math.min(current, maxIdx));
+      } else {
+        (track as HTMLElement).style.transform = 'translateX(-' + offset(current) + 'px)';
+      }
+    });
+
+    // Inicia o carrossel no slide 0
+    goTo(0);
+  }
+
+  // Executa a função isolada
+  initServicesCarousel();
 </script>
+
+
+
   <hr class="section-divider">

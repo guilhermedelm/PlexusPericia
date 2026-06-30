@@ -355,30 +355,42 @@ import '../styles/global.css';
     <slot />
 
 </body>
+
 <script>
-function applyTilt(selector){
-    document.querySelectorAll(selector).forEach(function(card){
-      card.addEventListener('mousemove',function(e){
-        var r=card.getBoundingClientRect();
-        var x=(e.clientX-r.left)/r.width  -0.5;
-        var y=(e.clientY-r.top) /r.height -0.5;
-        var rx= y*-14; var ry= x*14;
-        card.style.transition='transform .08s ease,box-shadow .1s';
-        card.style.transform='perspective(800px) rotateX('+rx+'deg) rotateY('+ry+'deg) translateZ(10px)';
-        card.style.boxShadow=(ry<0?'':'-')+Math.abs(ry)+'px '+(-rx)+'px 28px rgba(247,215,182,.14)';
+  // 1. Tipamos o parâmetro 'selector' como string
+  function applyTilt(selector: string) {
+    // 2. Fazemos o cast para NodeListOf<HTMLElement> para liberar o .style nos cards
+    const cards = document.querySelectorAll(selector) as NodeListOf<HTMLElement>;
+    
+    cards.forEach(function(card) {
+      // 3. Tipamos 'e' como MouseEvent (é mais limpo e oficial do que criar o objeto à mão)
+      card.addEventListener('mousemove', function(e: MouseEvent) {
+        const r = card.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width - 0.5;
+        const y = (e.clientY - r.top) / r.height - 0.5;
+        const rx = y * -14; 
+        const ry = x * 14;
+        
+        card.style.transition = 'transform .08s ease,box-shadow .1s';
+        card.style.transform = 'perspective(800px) rotateX(' + rx + 'deg) rotateY(' + ry + 'deg) translateZ(10px)';
+        card.style.boxShadow = (ry < 0 ? '' : '-') + Math.abs(ry) + 'px ' + (-rx) + 'px 28px rgba(247,215,182,.14)';
       });
-      card.addEventListener('mouseleave',function(){
-        card.style.transition='transform .45s ease,box-shadow .45s,border-color .3s';
-        card.style.transform='';
-        card.style.boxShadow='';
+      
+      card.addEventListener('mouseleave', function() {
+        card.style.transition = 'transform .45s ease,box-shadow .45s,border-color .3s';
+        card.style.transform = '';
+        card.style.boxShadow = '';
       });
     });
   }
+
+  // Agora pode chamar a função com segurança, passando as strings dos seletores!
   applyTilt('.service-card');
   applyTilt('.differential-card');
   applyTilt('.problem-card');
   applyTilt('.authority-client-card');
 </script>
+
 
   /* =============================================
      SCROLL 3D: COUNTER + SECTION DEPTH
@@ -403,7 +415,7 @@ function applyTilt(selector){
 <!-- ── Tintim WhatsApp Tracking ── -->
 
 
-<script>
+<!-- <script>
     (function(){
       function initTintim(){
         document.querySelectorAll('a[href*="wa.me"]').forEach(function(el){
@@ -423,6 +435,37 @@ function applyTilt(selector){
         document.addEventListener('DOMContentLoaded', initTintim);
       } else { initTintim(); }
     })();
+</script> -->
+
+<script>
+  function initTintim() {
+    // 1. Cast para NodeListOf<HTMLAnchorElement> para liberar a propriedade .dataset
+    const waLinks = document.querySelectorAll('a[href*="wa.me"]') as NodeListOf<HTMLAnchorElement>;
+    
+    waLinks.forEach(function(el) {
+      el.addEventListener('click', function() {
+        
+        // Agora o compilador aceita o dataset sem reclamar
+        const label = el.dataset.tintimLabel || document.title;
+        
+        // 2. Truque mágico: forçamos o TS a ignorar as regras rígidas do window
+        const w = window as any;
+        
+        // Google Tag Manager
+        if (w.dataLayer) {
+          w.dataLayer.push({ event: 'whatsapp_click', label: label });
+        }
+        
+        // Tintim pixel / TikTok Pixel
+        if (w.ttq) {
+          w.ttq.track('Contact', { description: label });
+        }
+      });
+    });
+  }
+
+  // 3. Executamos diretamente. O Astro garante que o DOM já está pronto!
+  initTintim();
 </script>
 
 

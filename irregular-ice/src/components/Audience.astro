@@ -189,16 +189,16 @@
     </div>
 </section>
 
-<script>
+<!-- <script>
 function initAudienceTabs(){
     var tabs   = document.querySelectorAll('.audience-tab');
     var panels = document.querySelectorAll('.audience-panel');
     if(!tabs.length) return;
 
     function switchPanel(targetId){
-      var next = document.getElementById('panel-'+targetId);
+      var next = document.getElementById('panel-'+targetId) ;
       if(!next) return;
-      var current = document.querySelector('.audience-panel.active');
+      var current = document.querySelector('.audience-panel.active') as HTMLElement | null;
       if(current === next) return;
 
       /* Fade out atual */
@@ -232,8 +232,83 @@ function initAudienceTabs(){
     });
 }
 initAudienceTabs();
-</script>
+</script> -->
+
+
+
 <script>
+  function initAudienceTabs() {
+    const tabs = document.querySelectorAll('.audience-tab');
+    const panels = document.querySelectorAll('.audience-panel');
+    if (!tabs.length) return;
+
+    // 1. Tipamos o targetId como string (ou null, caso o atributo não exista)
+    function switchPanel(targetId: string | null) {
+      if (!targetId) return; // Proteção extra caso venha vazio
+
+      // 2. Afirmamos que 'next' é um HTMLElement (para liberar o uso de .style)
+      const next = document.getElementById('panel-' + targetId) as HTMLElement | null;
+      if (!next) return;
+
+      // 3. Trocamos 'var' por 'const'. Isso garante ao TS que 'current'
+      // não vai virar null misteriosamente antes do setTimeout rodar!
+      const current = document.querySelector('.audience-panel.active') as HTMLElement | null;
+      if (current === next) return;
+
+      /* Fade out atual */
+      if (current) {
+        current.style.transition = 'opacity .22s ease';
+        current.style.opacity = '0';
+        
+        setTimeout(function() {
+          current.classList.remove('active');
+          current.style.opacity = '';
+          current.style.transition = '';
+          
+          /* Fade in novo */
+          next.style.opacity = '0';
+          next.style.transition = 'opacity .3s ease';
+          next.classList.add('active');
+          
+          requestAnimationFrame(function() {
+            requestAnimationFrame(function() {
+              next.style.opacity = '1';
+            });
+          });
+          
+          setTimeout(function() {
+            next.style.transition = '';
+          }, 350);
+        }, 230);
+      } else {
+        next.classList.add('active');
+      }
+    }
+
+    tabs.forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        tabs.forEach(function(t) { 
+          t.classList.remove('active'); 
+        });
+        tab.classList.add('active');
+        
+        // Passamos o valor do atributo (que o TS entende como string | null)
+        switchPanel(tab.getAttribute('data-tab'));
+      });
+    });
+  }
+
+  // Inicializa as abas
+  initAudienceTabs();
+</script>
+
+
+
+
+
+
+
+<!-- <script>
   (function(){
     function buildWAUrl(perfil, momento, telefone){
       var txt = 'Olá! Vim do site da Plexus Perícias.\n';
@@ -293,7 +368,90 @@ initAudienceTabs();
       initQualForm('med', 'Médico(a)/Clínica/Hospital');
     });
   })();
-  </script>
+  </script> -->
+
+  <script>
+  // 1. Tipamos os parâmetros da URL como strings
+  function buildWAUrl(perfil: string, momento: string, telefone: string): string {
+    let txt = 'Olá! Vim do site da Plexus Perícias.\n';
+    txt += '👤 Perfil: ' + perfil + '\n';
+    txt += '📋 Situação: ' + momento + '\n';
+    if (telefone) { txt += '📞 Telefone: ' + telefone + '\n'; }
+    txt += '\nGostaria de saber mais sobre os serviços.';
+    return 'https://wa.me/556130342602?text=' + encodeURIComponent(txt);
+  }
+
+  // 2. Tipamos os parâmetros da função inicializadora
+  function initQualForm(tabId: string, perfil: string) {
+    // Cast para NodeListOf<HTMLElement> para liberar o uso do .dataset
+    const opts = document.querySelectorAll('#qopts-' + tabId + ' .qual-opt') as NodeListOf<HTMLElement>;
+    
+    // Cast para HTMLAnchorElement para liberar o .href
+    const cta = document.getElementById('qcta-' + tabId) as HTMLAnchorElement | null;
+    
+    // Cast para HTMLElement genérico para o .style
+    const phoneGroup = document.getElementById('qphone-group-' + tabId) as HTMLElement | null;
+    
+    // Cast para HTMLInputElement para liberar o .value
+    const phoneInput = document.getElementById('qphone-' + tabId) as HTMLInputElement | null;
+    
+    // Definimos explicitamente o tipo da variável
+    let selected: string | null = null;
+
+    opts.forEach(function(opt) {
+      opt.addEventListener('click', function() {
+        opts.forEach(function(o) { o.classList.remove('selected'); });
+        opt.classList.add('selected');
+        
+        // Pegamos o valor com segurança
+        selected = opt.dataset.val || null;
+        
+        if (phoneGroup) phoneGroup.style.display = 'block';
+        
+        if (cta && selected) {
+          cta.style.pointerEvents = 'auto';
+          cta.style.opacity = '1';
+          cta.href = buildWAUrl(perfil, selected, phoneInput ? phoneInput.value : '');
+        }
+      });
+    });
+
+    if (phoneInput) {
+      phoneInput.addEventListener('input', function() {
+        if (selected && cta) {
+          cta.href = buildWAUrl(perfil, selected, phoneInput.value);
+        }
+      });
+    }
+
+    if (cta) {
+      cta.addEventListener('click', function(e) {
+        if (!selected) { 
+          e.preventDefault(); 
+          return; // Para a execução aqui se nada foi selecionado
+        }
+        
+        // 3. Truque para o GTM: Forçamos o TS a ignorar a tipagem rígida do window
+        const w = window as any;
+        
+        if (w.dataLayer) {
+          w.dataLayer.push({
+            event: 'lead_qualificado',
+            perfil: perfil,
+            momento: selected,
+            tem_telefone: !!(phoneInput && phoneInput.value)
+          });
+        }
+      });
+    }
+  }
+
+  // 4. Podemos executar as funções diretamente! O Astro já sabe
+  // o momento exato de injetar e rodar esse script na página.
+  initQualForm('adv', 'Advogado(a)/Escritório');
+  initQualForm('pac', 'Parte com advogado / Sem advogado');
+  initQualForm('med', 'Médico(a)/Clínica/Hospital');
+</script>
 
 
   <hr class="section-divider">
