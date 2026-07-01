@@ -1,7 +1,7 @@
 @font-face {
   font-family: 'Inter';
-  src: url('/fonts/Inter/InterVariable.woff2') format('woff2-variations'),
-       url('/fonts/Inter/InterVariable.woff2') format('woff2');
+  src: url('/fonts/Inter/Inter-Regular.woff2') format('woff2-variations'),
+       url('/fonts/Inter/Inter-Regular.woff2') format('woff2');
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
@@ -10,7 +10,7 @@
 /* Definição da fonte RoxboroughCF (Se tiveres o ficheiro dela, faz o mesmo) */
 @font-face {
   font-family: 'RoxboroughCF';
-  src: url('/fonts/RoxboroughCF.woff2') format('woff2'); /* Ajusta o caminho se necessário */
+  src: url('/fonts/roxborough-cf-regular.ttf') format('truetype'); /* Ajusta o caminho se necessário */
   font-weight: normal;
   font-style: normal;
   font-display: swap;
@@ -268,6 +268,7 @@ max-width:360px;font-size:14px;line-height:1.7}.footer-column h4{color:var(--whi
 /* ── 3D REVEAL OVERRIDE ── */
 .reveal{opacity:0;transform:perspective(1000px) translateY(32px) translateZ(-40px) rotateX(4deg) !important;transition:opacity .65s ease,transform .75s cubic-bezier(0.34,1.1,0.64,1) !important}
 .reveal.revealed{opacity:1 !important;transform:perspective(1000px) translateY(0) translateZ(0) rotateX(0deg) !important}
+
 
 /* ── 3D TILT ── */
 .service-card,.differential-card,.problem-card,.authority-client-card{transform-style:preserve-3d;will-change:transform}

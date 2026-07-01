@@ -339,7 +339,7 @@ import '../styles/global.css';
         });
     </script>
     <!-- Preload recursos críticos -->
-    <link rel="preload" href="/fonts/Inter/InterVariable.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/fonts/Inter/Inter-Regular.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="/images/logo.webp" as="image" fetchpriority="high">
     <link rel="preload" href="/images/hero-perla.webp" as="image" fetchpriority="high">
 
@@ -357,6 +357,27 @@ import '../styles/global.css';
 </body>
 
 <script>
+  function revealOnScroll() {
+    const elements = document.querySelectorAll('.reveal') as NodeListOf<HTMLElement>;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.15,
+      rootMargin: '0px 0px -30px 0px'
+    });
+
+    elements.forEach((element) => observer.observe(element));
+  }
+
+  document.addEventListener('DOMContentLoaded', revealOnScroll);
+  window.addEventListener('load', revealOnScroll);
+
   // 1. Tipamos o parâmetro 'selector' como string
   function applyTilt(selector: string) {
     // 2. Fazemos o cast para NodeListOf<HTMLElement> para liberar o .style nos cards

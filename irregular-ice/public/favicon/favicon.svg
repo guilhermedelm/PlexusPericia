@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Quadrado externo (topo-esquerda) -->
+  <rect x="4" y="4" width="58" height="58" fill="none" stroke="#f7d7b6" stroke-width="7" rx="2"/>
+  <!-- Quadrado interno (offset inferior-direita) -->
+  <rect x="38" y="38" width="58" height="58" fill="none" stroke="#f7d7b6" stroke-width="7" rx="2"/>
+</svg>
