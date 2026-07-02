@@ -1,0 +1,474 @@
+<section class="problem-v2 section-padding forms-section" id="triagem">
+<div class="lumen-form-container">
+  <form class="lumen-form" id="meuFormularioLumen">
+    <!-- <div class="form-row">
+      <div class="form-group">
+        <label>Nome <span class="required">*</span></label>
+        <input type="text" placeholder="Seu nome completo" id="nome" />
+        <span class="helper-text">Informe o seu nome.</span>
+      </div>
+      
+      <div class="form-group">
+        <label>Telefone / WhatsApp <span class="required">*</span></label>
+        <input type="tel" placeholder="(11) 99999-9999" id="telefone" />
+        <span class="helper-text">Informe um telefone válido com DDD.</span>
+      </div>
+    </div> -->
+
+    <!-- <div class="form-group">
+      <label>E-mail <span class="required">*</span></label>
+      <input type="email" placeholder="voce@exemplo.com.br" id="email" />
+      <span class="helper-text">Informe um e-mail válido.</span>
+    </div> -->
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>Você é <span class="required">*</span></label>
+        <div class="select-wrapper">
+          <select id="profissao">
+            <option value = "" disabled selected>Selecione um perfil</option>
+            <option value="Advogado(a)">Advogado(a)</option> 
+            <option value="Empresa/RH">Empresa/RH</option>
+            <option value="Médico(a)/Clínica/Hospital">Médico(a)/Clínica/Hospital</option>
+            <option value="Plano de saúde/Seguradora">Plano de saúde/Seguradora</option>
+            <option value="Parte com advogado">Parte com advogado</option>
+            <option value="Parte sem advogado">Parte sem advogado</option>
+
+          </select>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label>Esfera <span class="required">*</span></label>
+        <div class="select-wrapper">
+          <select id="esfera">
+            <option value="civel">Cível</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+        <label>Telefone / WhatsApp <span class="required">*</span></label>
+        <input type="tel" placeholder="(11) 99999-9999" id="telefone" />
+        <span class="helper-text">Informe um telefone válido com DDD.</span>
+      </div>
+
+    <div class="checkbox-group">
+      <input type="checkbox" id="privacidade" />
+      <label for="privacidade">
+        Autorizo o contato e o tratamento dos meus dados conforme a <a href="/privacidade">Política de Privacidade</a><br/>
+        A Lúmen Perícias atua com método e rigor técnico e não promete resultado.<span class="required">*</span>
+      </label>
+      <span class="helper-text">Você deve aceitar a política de privacidade.</span>
+    </div>
+
+    <div class="error-alert" id="alertaErro">
+      Confira os campos destacados e tente novamente.
+    </div>
+
+    <button type="submit" class="submit-button">
+      Enviar e falar no WhatsApp
+    </button>
+
+    <p class="form-footer-text">
+      Resposta em até 24h úteis. Sigilo absoluto. Sem compromisso.
+    </p>
+  </form>
+</div>
+
+<style>
+  /* Container Principal */
+  .lumen-form-container {
+    background-color: #171526;
+    border: 1px solid #2A2640;
+    border-radius: 16px;
+    padding: 40px;
+    width: 100%;
+    max-width: 650px;
+    margin: 0 auto;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    color: #FFFFFF;
+    box-sizing: border-box;
+  }
+
+  .lumen-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  label {
+    font-size: 14px;
+    font-weight: 700;
+    color: #FFFFFF;
+  }
+
+  .required {
+    color: #25D366;
+  }
+
+  input[type="text"],
+  input[type="tel"],
+  input[type="email"],
+  select,
+  textarea {
+    background-color: transparent;
+    border: 1px solid #3A3656;
+    border-radius: 8px;
+    padding: 14px 16px;
+    color: #FFFFFF;
+    font-size: 14px;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s ease;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: #6C6A82;
+  }
+
+  input:focus,
+  select:focus,
+  textarea:focus {
+    border-color: #25D366;
+  }
+
+  .select-wrapper {
+    position: relative;
+  }
+  .select-wrapper select {
+    width: 100%;
+    appearance: none;
+    -webkit-appearance: none;
+    cursor: pointer;
+  }
+  .select-wrapper::after {
+    content: "▼";
+    font-size: 10px;
+    color: #6C6A82;
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+  }
+  select option {
+    background-color: #171526;
+    color: #fff;
+  }
+
+  textarea {
+    resize: none;
+  }
+
+  .textarea-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .char-count {
+    font-size: 12px;
+    color: #6C6A82;
+    text-align: right;
+    width: 100%; /* Garante que fique à direita quando não há erro */
+  }
+
+  /* Estados de Erro */
+  .error-state input,
+  .error-state textarea {
+    border-color: #D94965;
+  }
+  
+  .helper-text {
+    display: none;
+    font-size: 12px;
+    color: #D94965;
+    font-style: italic;
+  }
+  
+  .error-state .helper-text {
+    display: block;
+  }
+  
+  .error-state .char-count {
+    width: auto; /* Ajusta se o texto de erro aparecer ao lado */
+  }
+
+  .checkbox-group {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-top: 10px;
+  }
+  
+  .checkbox-group input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 20px;
+    height: 20px;
+    border: 1px solid #6C6A82;
+    border-radius: 4px;
+    background-color: #E2DFEB;
+    cursor: pointer;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  
+  .checkbox-group input[type="checkbox"]:checked {
+    background-color: #25D366;
+    border-color: #25D366;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'%3E%3C/polyline%3E%3C/svg%3E");
+    background-size: 70%;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  .checkbox-group label {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #B5B2C6;
+    cursor: pointer;
+  }
+  
+  .checkbox-group a {
+    color: #FFFFFF;
+    text-decoration: underline;
+  }
+
+  .error-alert {
+    display: none; /* Oculto por padrão */
+    background-color: #371E2D;
+    border-radius: 8px;
+    padding: 16px;
+    color: #D94965;
+    font-size: 13px;
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  /* Classe para mostrar o alerta via JS */
+  .error-alert.show {
+    display: block;
+  }
+
+  .submit-button {
+    background-color: #25D366;
+    color: #FFFFFF;
+    border: none;
+    border-radius: 30px;
+    padding: 16px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.2s ease;
+  }
+  
+  .submit-button:hover {
+    background-color: #1EBE5A;
+  }
+
+  .form-footer-text {
+    text-align: center;
+    font-size: 12px;
+    color: #6C6A82;
+    margin: 0;
+    font-style: italic;
+  }
+
+  @media (max-width: 600px) {
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+    .lumen-form-container {
+      padding: 24px 16px;
+    }
+  }
+</style>
+
+</section>
+
+<hr class="section-divider">
+
+<script>
+  // Função auxiliar com Arrow Function e Template Literals
+  const buildWAUrl = (perfil, selected, phone) => {
+    const baseUrl = "https://wa.me/5511999999999?text=";
+    let mensagem = `Olá, sou ${perfil}. Meu momento: ${selected}.`;
+    
+    if (phone) {
+      mensagem += ` Meu número: ${phone}`;
+    }
+    
+    return baseUrl + encodeURIComponent(mensagem);
+  };
+
+
+
+  // Aguarda o Astro carregar a página (se estiver usando View Transitions)
+document.addEventListener('DOMContentLoaded', () => {
+  
+  // 1. Referencia o formulário inteiro
+  const form = document.getElementById('meuFormularioLumen');
+
+  // Verifica se o formulário existe na página atual
+  if (form) {
+    form.addEventListener('submit', (event) => {
+      // Evita o recarregamento da página
+      event.preventDefault();
+
+      // 2. Referencia cada input individualmente pelo ID
+      const inputNome = document.getElementById('nome');
+      const inputTelefone = document.getElementById('telefone');
+      const inputEmail = document.getElementById('email');
+      const selectProfissao = document.getElementById('profissao');
+      const selectEsfera = document.getElementById('esfera');
+      const textareaResumo = document.getElementById('resumo');
+      const checkboxPrivacidade = document.getElementById('privacidade');
+      const alertaErro = document.getElementById('alertaErro'); // Para manipular avisos
+
+      // 3. Extrai os valores digitados/selecionados pelo usuário
+      const dadosDoFormulario = {
+        nome: inputNome.value,
+        telefone: inputTelefone.value,
+        email: inputEmail.value,
+        profissao: selectProfissao.value,
+        esfera: selectEsfera.value,
+        resumo: textareaResumo.value,
+        // Atenção: checkbox usa .checked (retorna true ou false), e não .value
+        aceitouPrivacidade: checkboxPrivacidade.checked 
+      };
+
+      // Mostra no console para você ver que está funcionando!
+      console.log('Dados capturados:', dadosDoFormulario);
+      var temErro = false; // Variável para controlar se há erro
+      // --- AQUI VOCÊ PODE ADICIONAR SUA LÓGICA DE VALIDAÇÃO ---
+      // Exemplo rápido: Se o nome estiver vazio
+      if (!dadosDoFormulario.nome ) {
+        inputNome.closest('.form-group').classList.add('error-state');
+        alertaErro.style.display = 'block';
+        temErro = true; // Interrompe a execução
+        console.log('Erro: Nome não pode estar vazio.');
+      } else {
+        inputNome.closest('.form-group').classList.remove('error-state');
+        alertaErro.style.display = 'none';
+      }
+      if (!dadosDoFormulario.email) {
+        inputEmail.closest('.form-group').classList.add('error-state');
+        alertaErro.style.display = 'block';
+        temErro = true;
+        console.log('Erro: Email não pode estar vazio.');
+      } else {
+        inputEmail.closest('.form-group').classList.remove('error-state');
+        alertaErro.style.display = 'none';
+      }
+
+      if (!dadosDoFormulario.aceitouPrivacidade) {
+          checkboxPrivacidade.closest('.checkbox-group').classList.add('error-state'); // Você pode precisar ajustar o CSS para esse erro específico
+          alertaErro.style.display = 'block';        
+          temErro = true;
+          console.log('Erro: Você deve aceitar a política de privacidade.');
+        }
+
+        // Se houver erro, mostra o alerta geral e interrompe
+        if (temErro) {
+            alertaErro.style.display = 'block';
+            return;
+        }
+
+        // Se chegou até aqui, está tudo certo! Oculta o erro.
+        alertaErro.style.display = 'none';
+        console.log('Formulário validado com sucesso!', dadosDoFormulario);
+
+      // --- SE ESTIVER TUDO CERTO, VOCÊ PODE ENVIAR PARA O WHATSAPP ---
+      // const mensagem = `Olá, meu nome é ${dadosDoFormulario.nome}...`;
+      // window.open(`https://wa.me/5511999999999?text=${encodeURIComponent(mensagem)}`, '_blank');
+    });
+  }
+});
+
+
+
+
+  // Função principal usando ES6+
+  const initQualForm = (tabId, perfil) => {
+    const opts = document.querySelectorAll(`#qopts-${tabId} .qual-opt`);
+    const cta = document.getElementById(`qcta-${tabId}`);
+    const phoneGroup = document.getElementById(`qphone-group-${tabId}`);
+    const phoneInput = document.getElementById(`qphone-${tabId}`);
+    let selected = null;
+
+    // Guard clause: se não encontrar as opções na página atual, encerra a função
+    // Isso evita erros no console em páginas que não têm esse formulário
+    if (!opts.length) return;
+
+    opts.forEach((opt) => {
+      opt.addEventListener('click', () => {
+        // Remove classe 'selected' de todos e adiciona no clicado
+        opts.forEach((o) => o.classList.remove('selected'));
+        opt.classList.add('selected');
+        
+        selected = opt.dataset.val;
+
+        // Atualiza a UI
+        if (phoneGroup) phoneGroup.style.display = 'block';
+        if (cta) {
+          cta.style.pointerEvents = 'auto';
+          cta.style.opacity = '1';
+          cta.href = buildWAUrl(perfil, selected, phoneInput ? phoneInput.value : '');
+        }
+      });
+    });
+
+    if (phoneInput) {
+      phoneInput.addEventListener('input', () => {
+        if (selected && cta) {
+          cta.href = buildWAUrl(perfil, selected, phoneInput.value);
+        }
+      });
+    }
+
+    if (cta) {
+      cta.addEventListener('click', (e) => {
+        if (!selected) { 
+          e.preventDefault(); 
+          return;
+        }
+        
+        // Disparo do evento do GTM
+        if (window.dataLayer) {
+          window.dataLayer.push({
+            event: 'lead_qualificado',
+            perfil: perfil,
+            momento: selected,
+            tem_telefone: !!(phoneInput && phoneInput.value)
+          });
+        }
+      });
+    }
+  };
+
+  // O SEGREDO DO ASTRO: 
+  // Usa 'astro:page-load' em vez de 'DOMContentLoaded'
+  // Isso garante que o script rode mesmo se o usuário navegar via View Transitions
+  document.addEventListener('astro:page-load', () => {
+    initQualForm('adv', 'Advogado(a)/Escritório');
+    initQualForm('pac', 'Parte com advogado / Sem advogado');
+    initQualForm('med', 'Médico(a)/Clínica/Hospital');
+  });
+</script>
