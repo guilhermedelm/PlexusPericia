@@ -1,6 +1,6 @@
 <section class="problem-v2 section-padding forms-section" id="triagem">
 <div class="lumen-form-container">
-  <form class="lumen-form" id="meuFormularioLumen">
+  <form class="lumen-form" id="meuFormularioLumen" >
     <!-- <div class="form-row">
       <div class="form-group">
         <label>Nome <span class="required">*</span></label>
@@ -33,17 +33,22 @@
             <option value="Plano de saúde/Seguradora">Plano de saúde/Seguradora</option>
             <option value="Parte com advogado">Parte com advogado</option>
             <option value="Parte sem advogado">Parte sem advogado</option>
-
           </select>
+          <span class="helper-text">Você deve aceitar a política de privacidade.</span>
         </div>
       </div>
       
       <div class="form-group">
-        <label>Esfera <span class="required">*</span></label>
+        
+        <label>Momento <span class="required">*</span></label>
         <div class="select-wrapper">
-          <select id="esfera">
-            <option value="civel">Cível</option>
+          <select id="momento">
+            <option value = "" disabled selected>Selecione um momento</option>
+            <option value="Ainda não tenho processo aberto">Ainda não tenho processo aberto</option> 
+            <option value="Processo em andamento">Processo em andamento</option>
+            <option value="Tenho laudo/perícia para contestar">Tenho laudo/perícia para contestar</option>  
           </select>
+          <span class="helper-text">Você deve escolher uma esfera.</span>
         </div>
       </div>
     </div>
@@ -67,7 +72,7 @@
       Confira os campos destacados e tente novamente.
     </div>
 
-    <button type="submit" class="submit-button">
+    <button type="submit" class="btn-whatsapp">
       Enviar e falar no WhatsApp
     </button>
 
@@ -266,18 +271,7 @@
     display: block;
   }
 
-  .submit-button {
-    background-color: #25D366;
-    color: #FFFFFF;
-    border: none;
-    border-radius: 30px;
-    padding: 16px;
-    font-size: 16px;
-    font-weight: 700;
-    cursor: pointer;
-    margin-top: 10px;
-    transition: background-color 0.2s ease;
-  }
+
   
   .submit-button:hover {
     background-color: #1EBE5A;
@@ -333,23 +327,17 @@ document.addEventListener('DOMContentLoaded', () => {
       event.preventDefault();
 
       // 2. Referencia cada input individualmente pelo ID
-      const inputNome = document.getElementById('nome');
       const inputTelefone = document.getElementById('telefone');
-      const inputEmail = document.getElementById('email');
       const selectProfissao = document.getElementById('profissao');
-      const selectEsfera = document.getElementById('esfera');
-      const textareaResumo = document.getElementById('resumo');
+      const selectMomento = document.getElementById('momento');
       const checkboxPrivacidade = document.getElementById('privacidade');
       const alertaErro = document.getElementById('alertaErro'); // Para manipular avisos
 
       // 3. Extrai os valores digitados/selecionados pelo usuário
       const dadosDoFormulario = {
-        nome: inputNome.value,
         telefone: inputTelefone.value,
-        email: inputEmail.value,
         profissao: selectProfissao.value,
-        esfera: selectEsfera.value,
-        resumo: textareaResumo.value,
+        momento: selectMomento.value,
         // Atenção: checkbox usa .checked (retorna true ou false), e não .value
         aceitouPrivacidade: checkboxPrivacidade.checked 
       };
@@ -359,24 +347,34 @@ document.addEventListener('DOMContentLoaded', () => {
       var temErro = false; // Variável para controlar se há erro
       // --- AQUI VOCÊ PODE ADICIONAR SUA LÓGICA DE VALIDAÇÃO ---
       // Exemplo rápido: Se o nome estiver vazio
-      if (!dadosDoFormulario.nome ) {
-        inputNome.closest('.form-group').classList.add('error-state');
-        alertaErro.style.display = 'block';
-        temErro = true; // Interrompe a execução
-        console.log('Erro: Nome não pode estar vazio.');
+
+
+      if (!dadosDoFormulario.telefone) {
+          inputTelefone.closest('.form-group').classList.add('error-state');
+          temErro = true;
+          console.log('Erro: Telefone é obrigatório.');
       } else {
-        inputNome.closest('.form-group').classList.remove('error-state');
-        alertaErro.style.display = 'none';
+          inputTelefone.closest('.form-group').classList.remove('error-state');
       }
-      if (!dadosDoFormulario.email) {
-        inputEmail.closest('.form-group').classList.add('error-state');
-        alertaErro.style.display = 'block';
-        temErro = true;
-        console.log('Erro: Email não pode estar vazio.');
+
+      if (!dadosDoFormulario.profissao) {
+          selectProfissao.closest('.form-group').classList.add('error-state');
+          temErro = true;
+          console.log('Erro: Profissão é obrigatória.');
       } else {
-        inputEmail.closest('.form-group').classList.remove('error-state');
-        alertaErro.style.display = 'none';
+          selectProfissao.closest('.form-group').classList.remove('error-state');
       }
+
+
+      if (!dadosDoFormulario.momento) {
+          selectMomento.closest('.form-group').classList.add('error-state');
+          temErro = true;
+          console.log('Erro: Esfera é obrigatória.');
+      } else {
+          selectMomento.closest('.form-group').classList.remove('error-state');
+      }
+
+
 
       if (!dadosDoFormulario.aceitouPrivacidade) {
           checkboxPrivacidade.closest('.checkbox-group').classList.add('error-state'); // Você pode precisar ajustar o CSS para esse erro específico
@@ -395,13 +393,15 @@ document.addEventListener('DOMContentLoaded', () => {
         alertaErro.style.display = 'none';
         console.log('Formulário validado com sucesso!', dadosDoFormulario);
 
+
+      gtag_report_conversion()
+      window.open(buildWAUrl(dadosDoFormulario.profissao, dadosDoFormulario.momento, dadosDoFormulario.telefone), '_blank');
       // --- SE ESTIVER TUDO CERTO, VOCÊ PODE ENVIAR PARA O WHATSAPP ---
       // const mensagem = `Olá, meu nome é ${dadosDoFormulario.nome}...`;
       // window.open(`https://wa.me/5511999999999?text=${encodeURIComponent(mensagem)}`, '_blank');
     });
   }
 });
-
 
 
 
