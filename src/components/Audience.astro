@@ -1,7 +1,15 @@
+---
+import Forms from './Forms.astro';
+---
+
+
+
+
+
 <section class="audience section-padding">
     <div class="container">
         <div class="audience-header reveal" style="text-align:center">
-            <span class="section-tag">&#128100;&nbsp; Atendimento Especializado</span>
+            <span class="section-tag" > Atendimento Especializado</span>
             <h4 class="audience-title">Selecione seu perfil</h4>
             <p class="audience-subtitle">Seja você advogado, <strong>empresa</strong>, paciente ou médico, temos a solução técnica certa para o seu caso.</p>
         </div>
@@ -64,22 +72,6 @@
                             <li><svg class="icon audience-check-icon"><use href="/icons.svg#check"/></svg>Suporte técnico contínuo ao longo do processo</li>
                             <li><svg class="icon audience-check-icon"><use href="/icons.svg#check"/></svg>Assistência técnica médica pericial completa</li>
                         </ul>
-                                                <div class="qual-form" id="qform-adv">
-                          <p class="qual-form-label">Qual é o momento do seu caso?</p>
-                          <div class="qual-form-options" id="qopts-adv">
-                            <button type="button" class="qual-opt" data-tab="adv" data-val="Ainda não tenho processo aberto">Ainda não tenho processo aberto</button>
-                            <button type="button" class="qual-opt" data-tab="adv" data-val="Processo em andamento">Processo em andamento</button>
-                            <button type="button" class="qual-opt" data-tab="adv" data-val="Tenho laudo/perícia para contestar">Tenho laudo / perícia para contestar</button>
-                          </div>
-                          <div id="qphone-group-adv" style="display:none;margin-bottom:12px">
-                            <p class="qual-form-label" style="margin-bottom:6px">Telefone <span style="font-weight:400;opacity:.6">(opcional)</span></p>
-                            <input type="tel" class="qual-phone" id="qphone-adv" placeholder="(61) 99999-9999">
-                          </div>
-                          <a href="#" id="qcta-adv" data-perfil="Advogado(a)/Escritório" class="btn-whatsapp qual-cta" target="_blank" rel="noopener noreferrer" style="pointer-events:none;opacity:.45;width:100%;justify-content:center" onclick="gtag_report_conversion()">
-                            <svg class="icon"><use href="/icons.svg#whatsapp"/></svg>
-                            Solicitar análise do caso
-                          </a>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -109,28 +101,11 @@
                         <p class="audience-panel-desc">Atendemos pessoas físicas que precisam de um parecer médico fundamentado ou assistência técnica em perícias judiciais e administrativas.</p>
                         <ul class="audience-checklist">
                             <li><svg class="icon audience-check-icon"><use href="/icons.svg#check"/></svg>Perícia judicial desfavorável</li>
-                            <li><svg class="icon audience-check-icon"><use href="/icons.svg#check"/></svg>Perícia judicial desfavorável</li>
                             <li><svg class="icon audience-check-icon"><use href="/icons.svg#check"/></svg>Negativa de plano de saúde</li>
                             <li><svg class="icon audience-check-icon"><use href="/icons.svg#check"/></svg>Discussão de incapacidade laboral</li>
                             <li><svg class="icon audience-check-icon"><use href="/icons.svg#check"/></svg>Organização de documentação médica</li>
                             <li><svg class="icon audience-check-icon"><use href="/icons.svg#check"/></svg>Pareceres e laudos para fins de benefícios</li>
                         </ul>
-                                                <div class="qual-form" id="qform-pac">
-                          <p class="qual-form-label">Qual é o momento do seu caso?</p>
-                          <div class="qual-form-options" id="qopts-pac">
-                            <button type="button" class="qual-opt" data-tab="pac" data-val="Ainda não tenho processo aberto">Ainda não tenho processo aberto</button>
-                            <button type="button" class="qual-opt" data-tab="pac" data-val="Processo em andamento">Processo em andamento</button>
-                            <button type="button" class="qual-opt" data-tab="pac" data-val="Tenho laudo/perícia para contestar">Tenho laudo / perícia para contestar</button>
-                          </div>
-                          <div id="qphone-group-pac" style="display:none;margin-bottom:12px">
-                            <p class="qual-form-label" style="margin-bottom:6px">Telefone <span style="font-weight:400;opacity:.6">(opcional)</span></p>
-                            <input type="tel" class="qual-phone" id="qphone-pac" placeholder="(61) 99999-9999">
-                          </div>
-                          <a href="#" id="qcta-pac" data-perfil="Parte com advogado / Sem advogado" class="btn-whatsapp qual-cta" target="_blank" rel="noopener noreferrer" style="pointer-events:none;opacity:.45;width:100%;justify-content:center" onclick="gtag_report_conversion()">
-                            <svg class="icon"><use href="/icons.svg#whatsapp"/></svg>
-                            Solicitar análise do caso
-                          </a>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -165,27 +140,15 @@
                             <li><svg class="icon audience-check-icon"><use href="/icons.svg#check"/></svg>Suporte em processos junto a planos de saúde</li>
                             <li><svg class="icon audience-check-icon"><use href="/icons.svg#check"/></svg>Assessoria técnica em processos administrativos (CRM, ANS)</li>
                         </ul>
-                                                <div class="qual-form" id="qform-med">
-                          <p class="qual-form-label">Qual é o momento do seu caso?</p>
-                          <div class="qual-form-options" id="qopts-med">
-                            <button type="button" class="qual-opt" data-tab="med" data-val="Ainda não tenho processo aberto">Ainda não tenho processo aberto</button>
-                            <button type="button" class="qual-opt" data-tab="med" data-val="Processo em andamento">Processo em andamento</button>
-                            <button type="button" class="qual-opt" data-tab="med" data-val="Tenho laudo/perícia para contestar">Tenho laudo / perícia para contestar</button>
-                          </div>
-                          <div id="qphone-group-med" style="display:none;margin-bottom:12px">
-                            <p class="qual-form-label" style="margin-bottom:6px">Telefone <span style="font-weight:400;opacity:.6">(opcional)</span></p>
-                            <input type="tel" class="qual-phone" id="qphone-med" placeholder="(61) 99999-9999">
-                          </div>
-                          <a href="#" id="qcta-med" data-perfil="Médico(a)/Clínica/Hospital" class="btn-whatsapp qual-cta" target="_blank" rel="noopener noreferrer" style="pointer-events:none;opacity:.45;width:100%;justify-content:center" onclick="gtag_report_conversion()">
-                            <svg class="icon"><use href="/icons.svg#whatsapp"/></svg>
-                            Solicitar análise do caso
-                          </a>
-                        </div>
+
                     </div>
                 </div>
             </div>
 
-            </div><!-- /audience-panels -->
+          </div><!-- /audience-panels -->
+          <div class="audience-form-spacer" aria-hidden="true"></div>
+          <Forms />
+            
     </div>
 </section>
 

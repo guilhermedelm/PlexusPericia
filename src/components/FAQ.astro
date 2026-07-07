@@ -11,7 +11,7 @@
                     <svg class="icon"><use href="/icons.svg#chevron-down"/></svg>
                 </div>
                 <div class="faq-answer">
-                    <p>O Perito Judicial é nomeado pelo juiz e atua com imparcialidade (CPC art. 465). O Assistente Técnico é indicado pela parte para garantir o contraditório técnico — ele analisa o laudo do perito oficial, elabora quesitos estratégicos e pode apresentar parecer divergente fundamentado (CPC art. 466; Lei 12.842/2013). A Plexus atua exclusivamente como assistente técnico, em conformidade com a Resolução CFM nº 2.336/2023, que veda qualquer promessa de resultado ou garantia de êxito em publicidade médica. Nosso trabalho é entregar o melhor suporte técnico possível — o resultado depende do conjunto probatório e da decisão judicial.</p>
+                    <p>O Perito Judicial é nomeado pelo juiz e atua com imparcialidade (CPC art. 465/466), enquanto o Assistente Técnico é indicado pela parte para garantir o contraditório técnico e fundamentar a tese (Lei 12.842/2013). A atuação da Plexus Perícias segue a Resolução CFM nº 2.336/2023, que veda promessas de resultado ou garantia de êxito em publicidade médica. CPC art. 465/466 · Lei 12.842/2013 · Resolução CFM nº 2.336/2023. A Plexus Perícias atua com rigor técnico e metodologia estruturada, sem garantir resultados.</p>
                 </div>
             </div>
             <div class="faq-item">
@@ -62,4 +62,43 @@
         </div>
     </div>
 </section>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const items = document.querySelectorAll('.faq-item');
+
+    items.forEach((item) => {
+      const question = item.querySelector('.faq-question');
+      if (!question) return;
+
+      question.setAttribute('role', 'button');
+      question.setAttribute('tabindex', '0');
+      question.setAttribute('aria-expanded', 'false');
+
+      const toggle = () => {
+        const isOpen = item.classList.contains('active');
+
+        items.forEach((other) => {
+          other.classList.remove('active');
+          const otherQuestion = other.querySelector('.faq-question');
+          if (otherQuestion) {
+            otherQuestion.setAttribute('aria-expanded', 'false');
+          }
+        });
+
+        if (!isOpen) {
+          item.classList.add('active');
+          question.setAttribute('aria-expanded', 'true');
+        }
+      };
+
+      question.addEventListener('click', toggle);
+      question.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          toggle();
+        }
+      });
+    });
+  });
+</script>
   <hr class="section-divider">
