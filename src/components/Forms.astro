@@ -395,10 +395,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-      window.open(buildWAUrl(dadosDoFormulario.profissao, dadosDoFormulario.momento, dadosDoFormulario.telefone), '_blank');
-      // --- SE ESTIVER TUDO CERTO, VOCÊ PODE ENVIAR PARA O WHATSAPP ---
-      // const mensagem = `Olá, meu nome é ${dadosDoFormulario.nome}...`;
-      // window.open(`https://wa.me/5511999999999?text=${encodeURIComponent(mensagem)}`, '_blank');
+      const url = buildWAUrl(
+        dadosDoFormulario.profissao,
+        dadosDoFormulario.momento,
+        dadosDoFormulario.telefone
+      );
+      window.location.href = url;
     });
   }
 });
