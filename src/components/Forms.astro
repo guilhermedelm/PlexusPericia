@@ -281,6 +281,39 @@
 <!-- <hr class="section-divider"> -->
 
 <script>
+
+  function gtag_report_conversion(url) {
+
+          const callback = function () {
+            if (typeof url !== 'undefined') {
+              window.location.href = url;
+                  }
+              };
+
+          gtag('event', 'conversion', {
+              'send_to': 'AW-18027249419/KBR1COr2r44cEIv-h5RD',
+              'value': 1.0,
+              'currency': 'BRL'
+          });
+          setTimeout(() => {
+            window.location.href = url;
+          }, 300);
+          return false;
+        }
+        window.addEventListener('load', function() {
+            var s = document.createElement('script');
+            s.src = 'https://www.googletagmanager.com/gtag/js?id=AW-18027249419';
+            s.async = true;
+            s.onload = function() {
+                gtag('js', new Date());
+                gtag('config', 'AW-18027249419');
+            };
+            document.head.appendChild(s);
+        });
+
+
+
+
   // Função auxiliar com Arrow Function e Template Literals
   const buildWAUrl = (perfil, selected, phone) => {
     const baseUrl = "https://wa.me/556130342602?text=";
@@ -375,12 +408,12 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('Formulário validado com sucesso!', dadosDoFormulario);
 
 
-      if (typeof window !== 'undefined' && typeof window['gtag_report_conversion'] === 'function') {
-        window['gtag_report_conversion']();
-        console.log('Evento do Google Ads disparado com sucesso!');
-      } else {
-      console.warn('Função do Google Ads não encontrada.');
-      }
+      // if (typeof window !== 'undefined' && typeof window['gtag_report_conversion'] === 'function') {
+      //   window['gtag_report_conversion']();
+      //   console.log('Evento do Google Ads disparado com sucesso!');
+      // } else {
+      // console.warn('Função do Google Ads não encontrada.');
+      // }
 
 
       if (typeof fbq !== 'undefined') {
@@ -400,7 +433,13 @@ document.addEventListener('DOMContentLoaded', () => {
         dadosDoFormulario.momento,
         dadosDoFormulario.telefone
       );
-      window.location.href = url;
+      if (typeof window.gtag_report_conversion === 'function') {
+          gtag_report_conversion(url);
+          console.warn('Função do Google Ads encontrada e executada.');
+      } else {
+          console.warn('Função do Google Ads não encontrada.');
+          window.location.href = url;
+      }
     });
   }
 });
