@@ -96,19 +96,39 @@ max-width:360px;font-size:14px;line-height:1.7}.footer-column h4{color:var(--whi
 }
 
 /* ── SECTION TITLE ── */
-.section-title{letter-spacing:-.3px !important;line-height:1.16 !important}
+.section-title{
+  letter-spacing:-.3px !important;
+  line-height:1.16 !important;
+  font-weight:400 !important;
+  font-size:clamp(30px,3vw,48px) !important;
+}
 
 /* ── HERO — layout centralizado ── */
 .hero-inner{display:grid;grid-template-columns:1fr;gap:2rem;align-items:center;justify-items:center}
+.hero-content{max-width:1280px;width:100%}
+.hero-title{
+  display:block;
+  margin:0 auto;
+  max-width:1280px;
+  font-family:RoxboroughCF,Georgia,serif;
+  font-size:clamp(48px,4.7vw,104px);
+  line-height:.9;
+  letter-spacing:-.06em;
+  font-weight:400;
+  color:var(--white);
+  text-align:center;
+}
+.hero-line{display:block;white-space:normal}
+.hero-emphasis{color:var(--accent);font-style:italic}
 .hero-title-tag{
   display:block;font-size:clamp(10px,1.1vw,12px);
   text-transform:uppercase;letter-spacing:4px;
   color:var(--accent);font-weight:600;
-  font-family:Inter,sans-serif;margin-bottom:18px;opacity:.8
+  font-family:Inter,sans-serif;margin-bottom:26px;opacity:.8
 }
 .hero-logo-top{
   display:block;margin:0 auto 32px;
-  width:30%;min-width:180px;max-width:320px;height:auto
+  width:32%;min-width:200px;max-width:360px;height:auto
 }
 
   .stats-container {
@@ -495,7 +515,10 @@ max-width:360px;font-size:14px;line-height:1.7}.footer-column h4{color:var(--whi
   cursor:pointer;
 }
 .faq-question span{font-size:15px !important;font-weight:500 !important}
-.faq-question svg{transition:transform .3s ease}
+.faq-question svg{
+  transition:transform .3s ease;
+  color:rgba(17,25,40,.7);
+}
 .faq-answer{
   max-height:0;
   opacity:0;
@@ -504,7 +527,7 @@ max-width:360px;font-size:14px;line-height:1.7}.footer-column h4{color:var(--whi
   transition:all .3s ease;
 }
 .faq-item.active .faq-answer{
-  max-height:320px;
+  max-height:460px;
   opacity:1;
   padding:0 24px 20px;
 }
@@ -544,17 +567,18 @@ max-width:360px;font-size:14px;line-height:1.7}.footer-column h4{color:var(--whi
   display:grid;
   grid-template-columns:0.8fr 1.2fr;
   gap:72px;
-  align-items:start;
+  align-items:flex-end;
   margin-bottom:80px
 }
 @media(max-width:900px){.founder-grid{grid-template-columns:1fr;gap:36px}}
 
 /* Foto card */
-.founder-photo-wrap{position:relative}
+.founder-photo-wrap{position:relative;display:flex;align-items:flex-end}
 .founder-photo-card{
   position:relative;
   border-radius:16px;
   overflow:hidden;
+  align-self:flex-end;
   /* Moldura peach glow */
   border:1px solid rgba(247,215,182,.55);
   box-shadow:
