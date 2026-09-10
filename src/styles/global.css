@@ -120,11 +120,22 @@ max-width:360px;font-size:14px;line-height:1.7}.footer-column h4{color:var(--whi
 }
 .hero-line{display:block;white-space:normal}
 .peach-glow{color:var(--accent);text-shadow:0 0 18px rgba(247,215,182,.3);font-weight:700;font-style:normal}
+.hero-title-tag-row{
+  display:flex;align-items:center;justify-content:center;
+  gap:10px;margin-bottom:20px
+}
 .hero-title-tag{
   display:block;font-size:clamp(10px,1.1vw,12px);
   text-transform:uppercase;letter-spacing:4px;
   color:var(--white);font-weight:600;
-  font-family:Inter,sans-serif;margin-bottom:26px;opacity:.8
+  font-family:Inter,sans-serif;opacity:.8
+}
+.hero-title-tag-arrow{
+  width:clamp(24px,3vw,36px);height:auto;flex-shrink:0;
+  color:var(--accent);opacity:.85
+}
+@media (max-width:640px){
+  .hero-title-tag-arrow{width:20px}
 }
 .hero-logo-top{
   display:block;margin:0 auto 32px;
@@ -213,10 +224,12 @@ max-width:360px;font-size:14px;line-height:1.7}.footer-column h4{color:var(--whi
 .problem-v2-header{text-align:center;margin-bottom:64px}
 .problem-v2-title{
   font-family:RoxboroughCF,serif;
-  font-size:clamp(32px,5.2vw,58px);font-weight:400;font-style:italic;
+  font-size:clamp(24px,2.8vw,38px);font-weight:700;font-style:normal;
   color:var(--white);line-height:1.15;margin-bottom:20px;letter-spacing:-.5px;text-align:center
 }
-.cta-final .problem-v2-title{font-size:clamp(24px,2.8vw,38px);letter-spacing:-.3px}
+.cta-final .problem-v2-title{font-size:clamp(24px,5vw,38px);letter-spacing:-.3px}
+/* H8 — "Para Quem É": mantém o tamanho original (maior), só padroniza negrito/sem itálico/branco */
+.authority .problem-v2-title{font-size:clamp(32px,5vw,38px);color:var(--white)}
 .problem-v2-underline{width:64px;height:3px;background:var(--accent);border-radius:2px;margin:0 auto 28px;opacity:.75}
 .problem-v2-subtitle{color:var(--text-muted);max-width:560px;margin:0 auto;font-size:clamp(15px,1.8vw,17px);line-height:1.85}
 .problem-v2-grid{
@@ -227,7 +240,11 @@ max-width:360px;font-size:14px;line-height:1.7}.footer-column h4{color:var(--whi
 @media(max-width:639px){
   .problem-v2-grid{
     display:flex;flex-direction:row;overflow-x:auto;-webkit-overflow-scrolling:touch;
-    scroll-snap-type:x mandatory;gap:14px;padding-bottom:12px;background:none
+    scroll-snap-type:x mandatory;gap:14px;
+    /* padding-top extra: overflow-x:auto força overflow-y computado para "auto",
+       o que corta o box-shadow/borda peach do :active (transform:translateY(-4px))
+       quando o card é tocado. O padding dá espaço para o efeito sem cortar a borda. */
+    padding:14px 2px 12px;background:none
   }
   .problem-card{flex:0 0 82vw;scroll-snap-align:start;border:1px solid var(--brd-ghost) !important;border-radius:var(--r) !important}
 }
@@ -332,7 +349,7 @@ max-width:360px;font-size:14px;line-height:1.7}.footer-column h4{color:var(--whi
 .cta-final-slogan{
   font-family:RoxboroughCF,serif;
   font-size:clamp(16px,2vw,22px);font-weight:400;font-style:italic;
-  letter-spacing:.5px;color:var(--accent);
+  letter-spacing:.5px;color:var(--white);
   display:block;text-align:center;margin-bottom:10px;
   text-shadow:0 0 32px rgba(247,215,182,.35)
 }
@@ -370,7 +387,7 @@ max-width:360px;font-size:14px;line-height:1.7}.footer-column h4{color:var(--whi
 .audience{background:var(--primary);border-top:1px solid var(--brd-ghost);border-bottom:1px solid var(--brd-ghost)}
 .audience-header{text-align:left;margin-bottom:52px}
 .audience-title{
-  font-family:RoxboroughCF,serif;font-size:clamp(28px,3.8vw,52px);
+  font-family:RoxboroughCF,serif;font-size:clamp(28px,3.4vw,48px);
   font-weight:700;font-style:normal;color:var(--white);line-height:1.1;margin-bottom:16px;letter-spacing:-.5px
 }
 .audience-subtitle{color:var(--text-muted);font-size:clamp(14px,1.6vw,16px);line-height:1.8;max-width:520px}
@@ -641,8 +658,8 @@ max-width:360px;font-size:14px;line-height:1.7}.footer-column h4{color:var(--whi
 
 .founder-heading{
   font-family:RoxboroughCF,serif;
-  font-size:clamp(22px,2.8vw,38px);
-  font-weight:700;color:var(--white);
+  font-size:clamp(28px,3.4vw,48px);
+  font-weight:700;font-style:normal;color:var(--white);
   line-height:1.15;margin-bottom:22px;
   letter-spacing:-.3px
 }
@@ -744,7 +761,7 @@ max-width:360px;font-size:14px;line-height:1.7}.footer-column h4{color:var(--whi
 
   /* ── Problem ── */
   .problem-v2-header{margin-bottom:40px}
-  .problem-v2-title{font-size:clamp(24px,7vw,34px)}
+  .problem-v2-title{font-size:clamp(24px,5vw,38px)}
 
   /* ── Founder ── */
   .founder-grid{grid-template-columns:1fr !important;gap:32px;margin-bottom:48px}
@@ -876,6 +893,15 @@ max-width:360px;font-size:14px;line-height:1.7}.footer-column h4{color:var(--whi
 .faq-item{border-bottom-color:rgba(122,79,42,.25) !important}
 .faq-question span{color:#111928 !important}
 .faq-answer p{color:#2a1f14 !important}
+
+/* ── PADRONIZAÇÃO DE TÍTULOS DE DOBRA — negrito, sem itálico, tamanho consistente ── */
+.services .section-title,
+.process .section-title,
+.founder-differentials .section-title,
+.faq .section-title{
+  font-weight:700 !important;
+  font-style:normal !important;
+}
 
 /* ── AZUL — H4 Para Quem Atendemos ── */
 .audience{background:#162947 !important}
