@@ -1199,3 +1199,28 @@ max-width:360px;font-size:14px;line-height:1.7}.footer-column h4{color:var(--whi
   min-width: 180px;
 }
 .qual-cta { margin-top: 12px !important; }
+
+/* Botões do Hero */
+.hero-cta { width: 100%; }
+.hero-cta-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+  width: min(100%, 620px);
+  margin: 0 auto;
+}
+.hero-cta-buttons .btn-whatsapp { width: 100%; }
+.btn-whatsapp.hero-profile-link {
+  background: transparent;
+  border-color: var(--accent);
+  color: var(--accent);
+  box-shadow: none;
+  animation: none;
+}
+.btn-whatsapp.hero-profile-link:hover {
+  background: rgba(247, 215, 182, .12);
+  box-shadow: none !important;
+}
+@media (max-width: 600px) {
+  .hero-cta-buttons { grid-template-columns: 1fr; }
+}
